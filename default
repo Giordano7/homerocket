@@ -51,35 +51,6 @@ location / {
     }
 }
 
-# Hochzeitspage
-
-server {
-    listen 443 default_server ssl;
-    ssl on;
-    server_name simonaundalessandro.ch www.simonaundalessandro.ch;
-    ssl_certificate     /etc/letsencrypt/live/simonaundalessandro.ch-0002/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/simonaundalessandro.ch-0002/privkey.pem;location ~ /.well-known {
-            root /var/www/letsencrypt;
-            allow all;
-    }
-
-        if ($allowed_country = no) {
-            return 444;
-        }
-
-
-location / {
-            proxy_pass http://192.168.1.203/;
-            proxy_http_version 1.1;
-            proxy_set_header Upgrade $http_upgrade;
-            proxy_set_header Connection 'upgrade';
-            proxy_set_header Host $host;
-            proxy_cache_bypass $http_upgrade;
-    }
-
-}
-
-
 # Eat Page
 
 server {
